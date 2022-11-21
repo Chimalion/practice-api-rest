@@ -1,4 +1,4 @@
-import * as ApiModel from './hotel-collection.api-model';
+import * as ApiModel from './character-collection.api-model';
 import Axios from 'axios';
 
 const characterCollection = 'api/characters';
