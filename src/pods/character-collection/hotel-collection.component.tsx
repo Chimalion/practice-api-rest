@@ -1,6 +1,5 @@
 import * as React from 'react';
 import Button from '@material-ui/core/Button';
-import { HotelCard } from './components/hotel-card.component';
 import * as classes from './hotel-collection.styles';
 
 interface Props {
