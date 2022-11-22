@@ -1,15 +1,10 @@
-interface Origin {
-  name: string;
-  url: string;
-}
-
 interface BestSentences {
-  id: number;
+  id: string;
   sentence: string;
 }
 
 export interface CharacterEntity {
   id: number;
   name: string;
-  bestSentences: BestSentences;
+  bestSentences: BestSentences[];
 }

@@ -6,10 +6,9 @@ interface Origin {
 type Locationa = Origin;
 
 interface BestSentences {
-  id: number;
+  id: string;
   sentence: string;
 }
-
 export interface CharacterEntity {
   id: number;
   name: string;
@@ -23,5 +22,5 @@ export interface CharacterEntity {
   episode: string[];
   url: string;
   created: string;
-  bestSentences: BestSentences;
+  bestSentences: BestSentences[];
 }

@@ -4,10 +4,9 @@ interface Origin {
 }
 
 interface BestSentences {
-  id: number;
+  id: string;
   sentence: string;
 }
-
 export interface CharacterEntity {
   id: number;
   name: string;
@@ -16,5 +15,5 @@ export interface CharacterEntity {
   gender: string;
   origin: Origin;
   image: string;
-  bestSentences: BestSentences;
+  bestSentences: BestSentences[];
 }
