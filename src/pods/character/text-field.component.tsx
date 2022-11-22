@@ -16,12 +16,14 @@ const useStyles = makeStyles((theme) => ({
 interface Props {
   value: string;
   quotePosition: number;
+  handleDeleteSentence: () => void;
   handleEditSentence: (e) => void;
 }
 
 export const SentenceField: React.FunctionComponent<Props> = ({
   value,
   quotePosition,
+  handleDeleteSentence,
   handleEditSentence,
 }) => {
   const classes = useStyles();
@@ -33,6 +35,7 @@ export const SentenceField: React.FunctionComponent<Props> = ({
           color="primary"
           className={classes.button}
           startIcon={<DeleteIcon />}
+          onClick={handleDeleteSentence}
         >
           Delete
         </Button>

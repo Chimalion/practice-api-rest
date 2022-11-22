@@ -1,9 +1,9 @@
 import React from 'react';
 import { CharacterEntity } from './character.vm';
-import Axios from 'axios';
 import { SentenceField } from './text-field.component';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
+import { patchBestSentencesCharacter } from './api/character.api';
 
 export const useStyles = makeStyles((theme) => ({
   container: {
@@ -34,6 +34,23 @@ export const CharacterComponent: React.FunctionComponent<Props> = ({
     }));
   };
 
+  const handleAddSentence = () => {
+    setDirtyCharacter((c) => ({
+      ...c,
+      bestSentences: [
+        ...c.bestSentences,
+        { id: (c.bestSentences.length + 1).toString(), sentence: '' },
+      ],
+    }));
+  };
+
+  const handleDeleteSentence = (id: string) => () => {
+    setDirtyCharacter((c) => ({
+      ...c,
+      bestSentences: c.bestSentences.filter((sentence) => sentence.id !== id),
+    }));
+  };
+
   return (
     <>
       <h2>{dirtyCharacter.name}</h2>
@@ -45,20 +62,30 @@ export const CharacterComponent: React.FunctionComponent<Props> = ({
                   key={key}
                   value={sentence?.sentence}
                   quotePosition={key}
+                  handleDeleteSentence={handleDeleteSentence(sentence.id)}
                   handleEditSentence={handleEditSentence(sentence.id)}
                 />
               );
             })
           : null}
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-          <Button style={{ flexGrow: 1 }} variant="contained">
+          <Button
+            style={{ flexGrow: 1 }}
+            variant="contained"
+            onClick={handleAddSentence}
+          >
             Add sentence
           </Button>
           <Button
             style={{ flexGrow: 1 }}
             variant="contained"
-            color="primary" /*
-            onClick={() => handleSubmit(character.id.toString())} */
+            color="primary"
+            onClick={() =>
+              patchBestSentencesCharacter(
+                character.id.toString(),
+                dirtyCharacter.bestSentences
+              )
+            }
           >
             ¡Submit!
           </Button>

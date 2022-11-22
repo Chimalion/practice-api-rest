@@ -5,7 +5,7 @@ interface Origin {
 
 type Locationa = Origin;
 
-interface BestSentences {
+export interface BestSentences {
   id: string;
   sentence: string;
 }
