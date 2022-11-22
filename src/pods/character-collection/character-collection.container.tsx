@@ -8,19 +8,14 @@ export const CharacterCollectionContainer = () => {
   const { characterCollection, loadCharacterCollection } =
     useCharacterCollection();
 
-  const history = useHistory();
-
   React.useEffect(() => {
     loadCharacterCollection();
   }, []);
-  console.log(characterCollection);
+
   /*
-
-
   const handleEdit = (id: string) => {
     history.push(linkRoutes.editHotel(id));
   };
-
    */
 
   return <CharacterTable collection={characterCollection} />;

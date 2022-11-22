@@ -1,8 +1,9 @@
 import * as React from 'react';
 import { CharacterEntity } from '../character-collection.vm';
 import TableRow from '@material-ui/core/TableRow';
-import TableCell from '@material-ui/core/TableCell';
 import { makeStyles } from '@material-ui/core/styles';
+import { generatePath, useHistory } from 'react-router-dom';
+import { TableCellCharacter } from './table-cell.component';
 
 export const useStyles = makeStyles((theme) => ({
   row: {
@@ -12,10 +13,14 @@ export const useStyles = makeStyles((theme) => ({
     '&:nth-of-type(odd)': {
       backgroundColor: theme.palette.action.hover,
     },
+    '&:hover': {
+      cursor: 'pointer',
+    },
   },
   cell: {
     borderBottom: 'none',
   },
+  rowLink: {},
 }));
 
 interface Props {
@@ -25,20 +30,25 @@ interface Props {
 export const CharacterTableRow: React.FunctionComponent<Props> = ({
   character,
 }) => {
-  const { image, name, status } = character;
+  const history = useHistory();
+  const { image, name, status, id } = character;
   const classes = useStyles();
+
+  const handleNavigate = (id: string) => {
+    history.push(generatePath('/character/:id', { id }));
+  };
+
   return (
     <>
-      <TableRow className={classes.row}>
-        <TableCell className={classes.cell} align="right">
+      <TableRow
+        className={classes.row}
+        onClick={() => handleNavigate(id.toString())}
+      >
+        <TableCellCharacter>
           <img src={image} alt="" style={{ width: '7rem' }} />
-        </TableCell>
-        <TableCell className={classes.cell} align="right">
-          {name}
-        </TableCell>
-        <TableCell className={classes.cell} align="right">
-          {status}
-        </TableCell>
+        </TableCellCharacter>
+        <TableCellCharacter textField={name} />
+        <TableCellCharacter textField={status} />
       </TableRow>
     </>
   );

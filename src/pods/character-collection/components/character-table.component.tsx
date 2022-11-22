@@ -1,16 +1,4 @@
 import * as React from 'react';
-import { generatePath, Link, useHistory } from 'react-router-dom';
-import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader/CardHeader';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-import CardActions from '@material-ui/core/CardActions';
-import Typography from '@material-ui/core/Typography';
-import Avatar from '@material-ui/core/Avatar/Avatar';
-import IconButton from '@material-ui/core/IconButton/IconButton';
-import EditIcon from '@material-ui/icons/Edit';
-import DeleteIcon from '@material-ui/icons/Delete';
-import * as classes from './character-table-row.component';
 import TableContainer from '@material-ui/core/TableContainer';
 import Table from '@material-ui/core/Table';
 import TableHead from '@material-ui/core/TableHead';
@@ -21,6 +9,7 @@ import Paper from '@material-ui/core/Paper';
 import { CharacterEntity } from '../character-collection.vm';
 import { makeStyles } from '@material-ui/core/styles';
 import { CharacterTableRow } from './character-table-row.component';
+import { TableCellCharacter } from './table-cell.component';
 
 export const useStyles = makeStyles((theme) => ({
   table: {
@@ -31,11 +20,6 @@ export const useStyles = makeStyles((theme) => ({
   row: {
     display: 'flex',
     justifyContent: 'space-between',
-  },
-  rowLink: {
-    '&:nth-of-type(odd)': {
-      backgroundColor: theme.palette.action.hover,
-    },
   },
   cell: {
     borderBottom: 'none',
@@ -56,27 +40,14 @@ export const CharacterTable: React.FunctionComponent<Props> = ({
         <Table className={classes.table}>
           <TableHead>
             <TableRow className={classes.row}>
-              <TableCell className={classes.cell} align="right">
-                Picture
-              </TableCell>
-              <TableCell className={classes.cell} align="right">
-                Name
-              </TableCell>
-              <TableCell className={classes.cell} align="right">
-                Status
-              </TableCell>
+              <TableCellCharacter textField="Picture" />
+              <TableCellCharacter textField="Name" />
+              <TableCellCharacter textField="Status" />
             </TableRow>
           </TableHead>
           <TableBody className={classes.table}>
             {collection.map((character) => (
-              <>
-                <Link
-                  className={classes.rowLink}
-                  to={generatePath('/character/:id', { id: character.id })}
-                >
-                  <CharacterTableRow character={character} key={character.id} />
-                </Link>
-              </>
+              <CharacterTableRow character={character} key={character.id} />
             ))}
           </TableBody>
         </Table>
