@@ -4,7 +4,7 @@ import { BestSentences, CharacterEntity } from './character.api-model';
 export const getCharacterFromApi = async (
   id: string
 ): Promise<CharacterEntity> => {
-  const { data } = await Axios.get(`api/characters//${id}`);
+  const { data } = await Axios.get(`api/characters/${id}`);
   return data;
 };
 
